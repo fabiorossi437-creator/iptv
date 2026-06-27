@@ -1,1 +1,20 @@
-
+{
+  "canali": [
+    {"lcn":1,"nome":"Rai 1"},
+    {"lcn":2,"nome":"Rai 2"},
+    {"lcn":3,"nome":"Rai 3"},
+    {"lcn":4,"nome":"Rete 4"},
+    {"lcn":5,"nome":"Canale 5"},
+    {"lcn":6,"nome":"Italia 1"},
+    {"lcn":7,"nome":"La7"},
+    {"lcn":8,"nome":"TV8"},
+    {"lcn":9,"nome":"Nove"},
+    {"lcn":20,"nome":"20"},
+    {"lcn":24,"nome":"Rai News 24"},
+    {"lcn":25,"nome":"Rai Sport"},
+    {"lcn":50,"nome":"Sky TG24"},
+    {"lcn":57,"nome":"Sportitalia"},
+    {"lcn":58,"nome":"Sportitalia SoloCalcio"},
+    {"lcn":64,"nome":"SuperTennis"}
+  ]
+}
