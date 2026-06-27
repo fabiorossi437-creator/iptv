@@ -1,1 +1,27 @@
+name: Aggiorna playlist IPTV
 
+on:
+  schedule:
+    - cron: "0 3 * * *"
+  workflow_dispatch:
+
+jobs:
+  update:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Scarica repository
+        uses: actions/checkout@v4
+
+      - name: Aggiorna playlist italiana
+        run: |
+          curl -L https://iptv-org.github.io/iptv/countries/it.m3u -o playlist-source.m3u
+          cp playlist-source.m3u playlist.m3u
+
+      - name: Salva modifiche
+        run: |
+          git config user.name "github-actions"
+          git config user.email "actions@github.com"
+          git add playlist.m3u
+          git commit -m "Aggiornamento automatico playlist" || exit 0
+          git push
