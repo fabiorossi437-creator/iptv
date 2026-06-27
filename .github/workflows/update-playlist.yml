@@ -5,6 +5,9 @@ on:
     - cron: "0 3 * * *"
   workflow_dispatch:
 
+permissions:
+  contents: write
+
 jobs:
   update:
     runs-on: ubuntu-latest
@@ -12,11 +15,12 @@ jobs:
     steps:
       - name: Scarica repository
         uses: actions/checkout@v4
+        with:
+          token: ${{ secrets.GITHUB_TOKEN }}
 
       - name: Aggiorna playlist italiana
         run: |
-          curl -L https://iptv-org.github.io/iptv/countries/it.m3u -o playlist-source.m3u
-          cp playlist-source.m3u playlist.m3u
+          curl -L https://iptv-org.github.io/iptv/countries/it.m3u -o playlist.m3u
 
       - name: Salva modifiche
         run: |
