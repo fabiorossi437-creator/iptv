@@ -15,17 +15,23 @@ jobs:
     steps:
       - name: Scarica repository
         uses: actions/checkout@v4
-        with:
-          token: ${{ secrets.GITHUB_TOKEN }}
 
-      - name: Aggiorna playlist italiana
+      - name: Scarica lista italiana completa
         run: |
-          curl -L https://iptv-org.github.io/iptv/countries/it.m3u -o playlist.m3u
+          curl -L https://iptv-org.github.io/iptv/countries/it.m3u -o completa.m3u
+
+      - name: Crea playlist filtrata
+        run: |
+          echo "#EXTM3U" > playlist.m3u
+
+          while IFS= read -r canale; do
+            grep -i -A1 "$canale" completa.m3u >> playlist.m3u || true
+          done < filtro.txt
 
       - name: Salva modifiche
         run: |
           git config user.name "github-actions"
           git config user.email "actions@github.com"
           git add playlist.m3u
-          git commit -m "Aggiornamento automatico playlist" || exit 0
+          git commit -m "Playlist filtrata aggiornata" || exit 0
           git push
